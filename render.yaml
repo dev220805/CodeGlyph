@@ -1,0 +1,129 @@
+services:
+  - type: web
+    name: codebase-rag
+    runtime: python
+    plan: free
+    buildCommand: npm --prefix frontend ci && npm --prefix frontend run build && pip install -r backend/requirements.txt
+    startCommand: uvicorn main:app --app-dir backend --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: VITE_API_BASE_URL
+        value: /api
+      - key: LOCAL_INGESTION_WORKER
+        value: "true"
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: VITE_RAZORPAY_KEY_ID
+        sync: false
+      - key: TEAM_PLAN_AMOUNT_PAISE
+        value: "30000"
+      - key: TEAM_PLAN_DURATION_DAYS
+        value: "30"
+      - key: FREE_CODEBASE_BYTES
+        value: "200000000"
+      - key: TEAM_CODEBASE_BYTES
+        value: "800000000"
+      - key: GITHUB_CLIENT_ID
+        sync: false
+      - key: GITHUB_CLIENT_SECRET
+        sync: false
+      - key: GITHUB_REDIRECT_URI
+        sync: false
+      - key: GITHUB_FRONTEND_ORIGIN
+        sync: false
+      - key: GITHUB_TOKEN_ENCRYPTION_KEY
+        sync: false
+      - key: EDITING_TICKET_SECRET
+        sync: false
+      - key: EDITING_TICKET_TTL_SECONDS
+        value: "600"
+      - key: GITHUB_OAUTH_STATE_TTL_SECONDS
+        value: "600"
+      - key: MAX_GITHUB_CHANGE_BYTES
+        value: "10000000"
+      - key: GITHUB_EDITOR_MAX_BYTES
+        value: "2000000"
+      - key: NVIDIA_API_KEY
+        sync: false
+      - key: NVIDIA_BASE_URL
+        value: https://integrate.api.nvidia.com/v1
+      - key: NEMOTRON_MODEL
+        value: nvidia/nemotron-3-super-120b-a12b
+      - key: DETAILED_NEMOTRON_MODEL
+        value: nvidia/nemotron-3-ultra-550b-a55b
+      - key: CODE_EDITING_MODEL
+        value: nvidia/nemotron-3-super-120b-a12b
+      - key: CODE_EDITING_FALLBACK_MODEL
+        value: nvidia/nemotron-3.5-lightning-30b-a3b
+      - key: EMBEDDING_MODEL
+        value: nvidia/nemotron-3-embed-1b
+      - key: EMBEDDING_DIMENSION
+        value: "2048"
+      - key: EMBEDDING_BATCH_SIZE
+        value: "32"
+      - key: EMBEDDING_MIN_BATCH_SIZE
+        value: "4"
+      - key: EMBEDDING_CHUNK_BUFFER_SIZE
+        value: "256"
+      - key: EMBEDDING_BATCH_MAX_CHARACTERS
+        value: "160000"
+      - key: EMBEDDING_CACHE_MAX_REPOSITORY_BYTES
+        value: "25000000"
+      - key: NVIDIA_CALLS_PER_MINUTE
+        value: "40"
+      - key: QUERY_EMBEDDING_RESERVE_PER_MINUTE
+        value: "8"
+      - key: EMBEDDING_RETRY_ATTEMPTS
+        value: "5"
+      - key: EMBEDDING_RETRY_BASE_SECONDS
+        value: "2"
+      - key: EMBEDDING_PROGRESS_INTERVAL_BATCHES
+        value: "4"
+      - key: EMBEDDING_HEARTBEAT_INTERVAL_BATCHES
+        value: "2"
+      - key: MEMORY_TARGET_MB
+        value: "350"
+      - key: MEMORY_WARNING_MB
+        value: "400"
+      - key: MEMORY_CRITICAL_MB
+        value: "450"
+      - key: EMBEDDING_CONCURRENCY
+        value: "1"
+      - key: MAX_REPOSITORY_BYTES
+        value: "100000000"
+      - key: MAX_FILE_SIZE_BYTES
+        value: "50000000"
+      - key: MAX_REPOSITORY_CHUNKS
+        value: "15000"
+      - key: CHUNK_INSERT_BATCH_SIZE
+        value: "250"
+      - key: EDITING_RETRIEVAL_TOP_K
+        value: "32"
+      - key: EDITING_CONTEXT_CHARACTERS
+        value: "120000"
+      - key: EDITING_MAX_FILES
+        value: "6"
+      - key: EDITING_MAX_CHUNKS_PER_FILE
+        value: "256"
+      - key: DENSE_CANDIDATE_LIMIT
+        value: "256"
+      - key: ANSWER_RETRY_ATTEMPTS
+        value: "2"
+      - key: CORS_ORIGINS
+        sync: false

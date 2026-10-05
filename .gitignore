@@ -1,0 +1,30 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+web_modules/
+
+# Environments
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+repos_temp/
+frontend/dist/
+frontend/test-results/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation / Audits
+explanation.md
+PRODUCTION_AUDIT.md
